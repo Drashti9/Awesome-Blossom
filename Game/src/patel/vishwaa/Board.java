@@ -22,18 +22,19 @@ public class Board extends JPanel{
 	BufferedImage empty = null;
 	BufferedImage red = null;
 	String img = "red";
-	JLabel grid[][] = new JLabel [7][7];
-	JButton buttons [] = new JButton[7];
+	
 	int check[] = new int [7];
 	boolean turn = true;
+	static JFrame frame;
 	
 		
-	public Board(){
+	public Board(JFrame frame){
 		
 		final int FONT_SIZE = 72;
 		setBackground(Color.cyan);
+		this.frame = frame;
 		setPreferredSize(new Dimension(500, 500));
-		//setLayout( new GridLayout (4,4));
+		
 		name = new JLabel();
 				
 		BufferedImage img = null;
@@ -57,9 +58,7 @@ public class Board extends JPanel{
 			JOptionPane.showMessageDialog(null, "File not Found");
 		}*/
         
-		for(int i=0; i<7; i++){
-			buttons[i] = new JButton("1");
-		}
+		
         Instructions = new JButton("Instructions");
 		lblInstructions = new JLabel("Instructions here");
 		SinglePlayer = new JButton("Single Player");
@@ -84,9 +83,7 @@ public class Board extends JPanel{
 		TwoPlayer.addActionListener(new ClassListener());
 		Instructions.addActionListener(new ClassListener());
 		
-		for(int i=0; i<7; i++){
-			buttons[i].addActionListener(new ClassListener());
-		}	
+		
 		
 	}
 		
@@ -94,27 +91,17 @@ public class Board extends JPanel{
 			public void actionPerformed(ActionEvent event) {
 				
 				if (event.getSource() == SinglePlayer) {
-					setBackground(new Color (0,80,158));
-					setLayout(new GridLayout(8, 7));	
-									
-					remove(SinglePlayer);
-					remove(TwoPlayer);
-					remove(name);
-					remove(Instructions);				
+			
+					frame.getContentPane().remove(frame.getComponent(0));
+					//frame.getComponent(0).setVisible(false);
+					frame.getContentPane().add(new Board2());
+					frame.pack();
+					frame.setResizable(false);
+					frame.setVisible(true);
 					
-					for(int i=0; i<7; i++){
-						add(buttons[i]);
-						buttons[i].setVisible(true);
-					}
-					buttons[5].setVisible(false);
 					
-					for(int i=0; i<7; i++){
-						for(int j=0; j<7; j++){
-							grid[i][j] = new JLabel();
-							grid[i][j].setIcon(new ImageIcon(empty));
-							add(grid[i][j]);
-						}
-					}				
+					
+					
 				}
 				
 				else if (event.getSource() == Instructions) {
@@ -127,7 +114,7 @@ public class Board extends JPanel{
 					remove(Instructions);					
 					lblInstructions.setText("<html> Instructions <br> <br> 1) Put your tokens <br> <br> 2) Try to connect 4 <html>");
 				}
-				else if(event.getSource() == TwoPlayer){
+				/*else if(event.getSource() == TwoPlayer){
 					for(int i=0; i<7; i++){
 						for(int j=0; j<7; j++){
 							grid[i][j] = new JLabel();
@@ -136,11 +123,11 @@ public class Board extends JPanel{
 						}
 					}
 					
-				}
+				}*/
 			}
 		}		
 		
-		private class ClassListener2 implements ActionListener {
+	/*	private class ClassListener2 implements ActionListener {
 			public void actionPerformed(ActionEvent event) {
 				
 				for(int i=0; i<7; i++){
@@ -168,8 +155,10 @@ public class Board extends JPanel{
 				}
 				
 			}
-		}		
-	}
+		}		*/
+}
+
+
 
 	
 

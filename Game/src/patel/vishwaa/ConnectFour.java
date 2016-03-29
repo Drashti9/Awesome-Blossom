@@ -10,7 +10,7 @@ public class ConnectFour {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Connect Four");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new Board());
+		frame.getContentPane().add(new Board(frame));
 		frame.pack();
 		frame.setResizable(false);
 		frame.setVisible(true);
